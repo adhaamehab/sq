@@ -1,0 +1,15 @@
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build
+build/
+bin/
+
+# Dependency directories
+vendor/
+
+.vscode/*
