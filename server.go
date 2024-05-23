@@ -61,31 +61,13 @@ func (s *Server) handleConnection(conn net.Conn) {
 		}
 		input = strings.TrimSpace(input)
 
-		command, args := parseCommand(input)
+		command, _ := parseCommand(input)
 
-		fmt.Println("Received command:", command)
 		// Handle the command
 		switch command {
 		case PINGCMD:
+			fmt.Println("Received PING command")
 			conn.Write([]byte("PONG\n"))
-		case PUSHCMD:
-			if len(args) == 0 {
-				conn.Write([]byte("Missing argument\n"))
-				continue
-			}
-			
-			item := Item(strings.Join(args, " "))
-			s.Queue.Push(item)
-			conn.Write([]byte("OK\n"))
-			
-
-		case POPCMD:
-			item, ok := s.Queue.Pop()
-			if !ok {
-				conn.Write([]byte("\n"))
-				continue
-			}
-			conn.Write([]byte(item + "\n"))
 		default:
 			fmt.Println("Unknown command:", command)
 			conn.Write([]byte("Unknown command\n"))

@@ -8,15 +8,15 @@ type Queue struct {
 	items []Item
 }
 
-// Push adds an item to the end of the queue
-func (q *Queue) Push(item Item) {
+// Enqueue adds an item to the end of the queue (RPUSH)
+func (q *Queue) Enqueue(item Item) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	q.items = append(q.items, item)
 }
 
-// Pop removes an item from the front of the queue
-func (q *Queue) Pop() (Item, bool) {
+// Dequeue removes an item from the front of the queue (LPOP)
+func (q *Queue) Dequeue() (Item, bool) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	if len(q.items) == 0 {
@@ -27,22 +27,22 @@ func (q *Queue) Pop() (Item, bool) {
 	return item, true
 }
 
-// Length returns the number of items in the queue
+// Length returns the number of items in the queue (LLEN)
 func (q *Queue) Length() int {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	return len(q.items)
 }
 
-// PushFront adds an item to the front of the queue
-func (q *Queue) PushFront(item Item) {
+// EnqueueFront adds an item to the front of the queue (LPUSH)
+func (q *Queue) EnqueueFront(item Item) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	q.items = append([]Item{item}, q.items...)
 }
 
-// PopBack removes an item from the end of the queue
-func (q *Queue) PopBack() (Item, bool) {
+// DequeueBack removes an item from the end of the queue (RPOP)
+func (q *Queue) DequeueBack() (Item, bool) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	if len(q.items) == 0 {
