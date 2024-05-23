@@ -2,6 +2,7 @@
 project_name: sq
 builds:
   - main: ./cmd
+    id: sq-server
     goos:
       - linux
       - darwin
@@ -16,6 +17,7 @@ builds:
     # binaries:
     #   - name: server
   - main: ./cmd/cli
+    id: sq-cli
     goos:
       - linux
       - darwin
@@ -29,15 +31,6 @@ builds:
       - CGO_ENABLED=0
     # binaries:
     #   - name: cli
-
-archive:
-  format: tar.gz
-  format_overrides:
-    - goos: windows
-      format: zip
-
-checksum:
-  name_template: "checksums.txt"
 
 changelog:
   sort: asc
