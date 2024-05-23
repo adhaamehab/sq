@@ -22,7 +22,7 @@ jobs:
         run: go mod tidy
 
       - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@v5
         with:
           version: latest
 
