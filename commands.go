@@ -19,7 +19,7 @@ func parseCommand(input string) (Command, []string) {
 		return "", nil
 	}
 
-	cmd := strToCommand(parts[0])
+	cmd := strToCommand(strings.ToUpper(parts[0]))
 	args := parts[1:]
 
 	return cmd, args
