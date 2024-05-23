@@ -6,8 +6,8 @@ type Command string
 
 const (
 	PINGCMD    Command = "PING"
-	ENQUEUECMD Command = "ENQUEUE"
-	DEQUEUECMD Command = "DEQUEUE"
+	PUSHCMD Command = "PUSH"
+	POPCMD Command = "POP"
 	PEEKCMD    Command = "PEEK"
 	UnknownCMD Command = "UNKNOWN"
 )
@@ -19,7 +19,7 @@ func parseCommand(input string) (Command, []string) {
 		return "", nil
 	}
 
-	cmd := strToCommand(parts[0])
+	cmd := strToCommand(strings.ToUpper(parts[0]))
 	args := parts[1:]
 
 	return cmd, args
@@ -29,10 +29,10 @@ func strToCommand(str string) Command {
 	switch str {
 	case "PING":
 		return PINGCMD
-	case "ENQUEUE":
-		return ENQUEUECMD
-	case "DEQUEUE":
-		return DEQUEUECMD
+	case "PUSH":
+		return PUSHCMD
+	case "POP":
+		return POPCMD
 	case "PEEK":
 		return PEEKCMD
 	default:
