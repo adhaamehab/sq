@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "*"
 
 jobs:
   release:
@@ -21,12 +21,10 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
-      - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v5
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@master
         with:
           version: latest
-
-      - name: Run GoReleaser
-        run: goreleaser release --rm-dist
+          args: release --rm-dist
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
