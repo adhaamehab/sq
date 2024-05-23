@@ -6,8 +6,8 @@ type Command string
 
 const (
 	PINGCMD    Command = "PING"
-	ENQUEUECMD Command = "ENQUEUE"
-	DEQUEUECMD Command = "DEQUEUE"
+	PUSHCMD Command = "PUSH"
+	POPCMD Command = "POP"
 	PEEKCMD    Command = "PEEK"
 	UnknownCMD Command = "UNKNOWN"
 )
@@ -29,10 +29,10 @@ func strToCommand(str string) Command {
 	switch str {
 	case "PING":
 		return PINGCMD
-	case "ENQUEUE":
-		return ENQUEUECMD
-	case "DEQUEUE":
-		return DEQUEUECMD
+	case "PUSH":
+		return PUSHCMD
+	case "POP":
+		return POPCMD
 	case "PEEK":
 		return PEEKCMD
 	default:
