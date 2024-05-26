@@ -68,24 +68,16 @@ func (s *Server) handleConnection(conn net.Conn) {
 		switch command {
 		case PINGCMD:
 			conn.Write([]byte("PONG\n"))
-		case PUSHCMD:
+		case APPEND:
 			if len(args) == 0 {
 				conn.Write([]byte("Missing argument\n"))
 				continue
 			}
-			
-			item := Item(strings.Join(args, " "))
-			s.Queue.Push(item)
-			conn.Write([]byte("OK\n"))
-			
 
-		case POPCMD:
-			item, ok := s.Queue.Pop()
-			if !ok {
-				conn.Write([]byte("\n"))
-				continue
-			}
-			conn.Write([]byte(item + "\n"))
+			item := Item(strings.Join(args, " "))
+			s.Queue.Append(item)
+			conn.Write([]byte("OK\n"))
+
 		default:
 			fmt.Println("Unknown command:", command)
 			conn.Write([]byte("Unknown command\n"))

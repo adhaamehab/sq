@@ -6,9 +6,7 @@ type Command string
 
 const (
 	PINGCMD    Command = "PING"
-	PUSHCMD Command = "PUSH"
-	POPCMD Command = "POP"
-	PEEKCMD    Command = "PEEK"
+	APPEND     Command = "APPEND"
 	UnknownCMD Command = "UNKNOWN"
 )
 
@@ -29,12 +27,8 @@ func strToCommand(str string) Command {
 	switch str {
 	case "PING":
 		return PINGCMD
-	case "PUSH":
-		return PUSHCMD
-	case "POP":
-		return POPCMD
-	case "PEEK":
-		return PEEKCMD
+	case "APPEND":
+		return APPEND
 	default:
 		return UnknownCMD
 	}
